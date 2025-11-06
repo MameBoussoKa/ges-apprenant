@@ -4,13 +4,13 @@
 
 ---
 
-## 🎯 Objectif
+##  Objectif
 
 Permettre une gestion centralisée et sécurisée des informations des apprenants, avec des accès différenciés selon les rôles (Admin, Apprenant, Vigile).
 
 ---
 
-## 🏗️ Architecture
+##  Architecture
 
 - **Modèle (Model)** : Gère les interactions avec les données (fichiers ou base de données).
 - **Vue (View)** : Affiche les interfaces utilisateur.
@@ -39,7 +39,7 @@ Permettre une gestion centralisée et sécurisée des informations des apprenant
 
 ---
 
-## 🔐 Fonctionnalités principales
+##  Fonctionnalités principales
 
 - Authentification et gestion de session.
 - Interface responsive.
@@ -49,7 +49,7 @@ Permettre une gestion centralisée et sécurisée des informations des apprenant
 
 ---
 
-## 🚀 Technologies utilisées
+##  Technologies utilisées
 
 - PHP (Vanilla)
 - HTML/CSS

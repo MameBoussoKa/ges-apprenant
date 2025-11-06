@@ -24,7 +24,7 @@ function send_user_credentials(string $email, string $prenom, string $password):
         $mail->Port = 587;
 
         // Infos de l'email
-        $mail->setFrom('Tapha.ednayas313@gmail.com', 'Admin GES Apprenant');
+        $mail->setFrom('kamamediarra2002@gmail.com', 'Admin GES Apprenant');
         $mail->addAddress($email, $prenom);
 
         $mail->isHTML(true);

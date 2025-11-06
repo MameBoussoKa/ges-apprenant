@@ -1,6 +1,8 @@
 <?php
 
-Promotions::FIND_ALL_PROMOTIONS_FILTER->value => function ($filter = null, $search = '', $page = 1, $limit = 3) use (&$promotion_services) {
+use App\Enums\Promotions;
+
+function ($filter = null, $search = '', $page = 1, $limit = 3) use (&$promotion_services) {
     $promotions = $promotion_services[Promotions::FIND_ALL_PROMOTIONS->value]();
 
     // Trouver la promotion active
@@ -43,4 +45,5 @@ Promotions::FIND_ALL_PROMOTIONS_FILTER->value => function ($filter = null, $sear
         'total' => $total,
         'pages' => ceil($total / $limit)
     ];
-},
+};
+ 

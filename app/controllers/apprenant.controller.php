@@ -181,8 +181,16 @@ function export_file_template(): void {
 
 
 function show_add_list_apprenants() {
+    global $promotion_services;
 
-    render_view('apprenant/add_apprenants.html.php', 'grid.layout.php');
+    $active_promotion = $promotion_services[Promotions::FIND_ACTIVE_PROMOTION->value]();
+    $referentiels = $active_promotion['referentiels'] ?? [];
+
+    $data = [
+        'referentiels' => $referentiels
+    ];
+
+    render_view('apprenant/add_apprenants.html.php', 'grid.layout.php', $data);
     exit;
 }
 
@@ -631,7 +639,7 @@ function manual_register_apprenant() {
             session_service_exec(Sessions::SET_ERROR_MESSAGE)(FrErrorMessages::FORM_INVALID->value);
             // session_service_exec(Sessions::SET_ERRORS)($result['errors']);
             $data = [ 'errors' => $result['errors']];
-            render_view('apprenants/add_apprenants.html.php', 'list.layout.php', $data);
+            render_view('apprenant/add_apprenants.html.php', 'list.layout.php', $data);
             exit;
         }
 

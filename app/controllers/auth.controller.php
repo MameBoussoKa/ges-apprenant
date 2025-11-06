@@ -251,7 +251,7 @@ function authenticate_user(array $user, $user_services): bool {
             'prenom' => $user_found['prenom'],
             'role' => $user_found['role'],
             'authenticated' => true,
-            'must_change_password' => $user_found['must_change_password']
+            'must_change_password' => $user_found['must_change_password'] ?? false
         ]);
         return true;
     }
@@ -337,7 +337,7 @@ function create_apprenant() {
         $auth_services['send_welcome_email']($user['email'], $matricule, $password);
         $auth_services['log_audit']('USER_CREATED', ['matricule' => $matricule]);
 
-        $_SESSION['success'] = MSG_SUCCESS['USER_CREATED'];
+        $_SESSION['success'] ['USER_CREATED'];
         header('Location: /user/success');
         exit;
     }
@@ -363,11 +363,11 @@ function change_password_controller() {
 
         $user = $services['find_user']($_SESSION['user']['matricule']);
         if (!$user || !password_verify($current_password, $user['password'])) {
-            $errors['current_password'] = MSG_ERROR['INVALID_CURRENT_PASSWORD'];
+            $errors['current_password'] ['INVALID_CURRENT_PASSWORD'];
         }
 
         if ($new_password !== $confirm_password) {
-            $errors['confirm_password'] = MSG_ERROR['PASSWORD_MISMATCH'];
+            $errors['confirm_password'] ['PASSWORD_MISMATCH'];
         }
 
         $password_error = $services['validate_field'](
@@ -393,7 +393,7 @@ function change_password_controller() {
         $_SESSION['user'] = $user;
         $services['log_audit']('PASSWORD_CHANGED', ['matricule' => $user['matricule']]);
 
-        $_SESSION['success'] = MSG_SUCCESS['PASSWORD_CHANGED'];
+        $_SESSION['success'] ['PASSWORD_CHANGED'];
         header('Location: /dashboard');
         exit;
     }
@@ -441,22 +441,6 @@ function login_controller() {
 }
 
 
-function validate(array $data, array $rules) {
-    global $validators_services, $session_services;
-
-    $validation = $validators_services[Validators::VALIDATE->value]($data, $rules);
-
-    if (!$validation['is_valid']) {
-        $session_services[Sessions::SET_ERRORS->value]($validation['errors']);
-        $session_services[Sessions::SET_OLD_INPUT->value]($data);
-        $session_services[Sessions::SET_ERROR_MESSAGE->value](FrErrorMessages::LOGIN_ERROR->value);
-        redirect_to_route(Routes::AUTH->resolve());
-        exit;
-    }
-
-
-
-}
 
 
 function get_all_users() : array {
